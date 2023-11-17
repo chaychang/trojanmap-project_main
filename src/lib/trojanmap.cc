@@ -84,7 +84,11 @@ std::pair<double, double> TrojanMap::GetPosition(std::string name) {
  * @param  {std::string} b          : second string
  * @return {int}                    : edit distance between two strings
  */
-int TrojanMap::CalculateEditDistance(std::string a, std::string b) {     
+int TrojanMap::CalculateEditDistance(std::string a, std::string b) {  
+
+
+  
+     
   return 0;
 }
 
