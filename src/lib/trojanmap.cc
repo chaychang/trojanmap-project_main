@@ -163,6 +163,13 @@ std::vector<std::string> TrojanMap::GetAllCategories() {
 std::vector<std::string> TrojanMap::GetAllLocationsFromCategory(
     std::string category) {
   std::vector<std::string> res;
+  for (auto it = data.begin(); it != data.end(); it++){
+    for(auto elem : it->second.attributes){
+      if (elem == category){
+        res.push_back(it->second.id);
+      }
+    }
+  }
   return res;
 }
 
