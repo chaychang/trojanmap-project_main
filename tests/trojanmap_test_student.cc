@@ -128,3 +128,44 @@ TEST(TrojanMapTest, GetLocationRegex3) {
   std::set<std::string> actual_set(actual.begin(), actual.end());
   EXPECT_EQ(expected_set, actual_set);
 }
+
+// Test cycle detection function
+TEST(TrojanMapTest, TopologicalSort) {
+  TrojanMap m;
+  
+  std::vector<std::string> location_names = {"Ralphs", "Chick-fil-A", "KFC"};
+  std::vector<std::vector<std::string>> dependencies = {{"Ralphs","KFC"}, {"Ralphs","Chick-fil-A"}, {"KFC","Chick-fil-A"}};
+  auto result = m.DeliveringTrojan(location_names, dependencies);
+  std::vector<std::string> gt ={"Ralphs", "KFC","Chick-fil-A"};
+  EXPECT_EQ(result, gt);
+}
+
+TEST(TrojanMapTest, TopologicalSort2) {
+  TrojanMap m;
+  
+  std::vector<std::string> location_names = {"0", "1", "2", "3"};
+  std::vector<std::vector<std::string>> dependencies = {{"0","1"}, {"1","2"}, {"2","3"}};
+  auto result = m.DeliveringTrojan(location_names, dependencies);
+  std::vector<std::string> gt ={"0", "1", "2", "3"};
+  EXPECT_EQ(result, gt);
+}
+
+TEST(TrojanMapTest, TopologicalSort3) {
+  TrojanMap m;
+  
+  std::vector<std::string> location_names = {"0", "1", "2", "3", "4"};
+  std::vector<std::vector<std::string>> dependencies = {{"0","1"}, {"0","2"}, {"1","2"}, {"1","3"}, {"2","3"}, {"2","4"}};
+  auto result = m.DeliveringTrojan(location_names, dependencies);
+  std::vector<std::string> gt ={"0", "1", "2", "3", "4"};
+  EXPECT_EQ(result, gt);
+}
+
+TEST(TrojanMapTest, TopologicalSort4) {
+  TrojanMap m;
+  
+  std::vector<std::string> location_names = {"0", "1", "2", "3", "4"};
+  std::vector<std::vector<std::string>> dependencies = {{"0","1"}, {"0","2"}, {"1","2"}, {"1","3"}, {"2","3"}, {"2","0"}};
+  auto result = m.DeliveringTrojan(location_names, dependencies);
+  std::vector<std::string> gt ={};
+  EXPECT_EQ(result, gt);
+}

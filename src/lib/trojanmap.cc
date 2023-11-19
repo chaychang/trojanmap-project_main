@@ -380,6 +380,36 @@ std::vector<std::string> TrojanMap::DeliveringTrojan(
     std::vector<std::string> &locations,
     std::vector<std::vector<std::string>> &dependencies) {
   std::vector<std::string> result;
+  std::map<std::string, std::vector<std::string>> aftrloc;
+  std::map<std::string, int> in_degree;
+  std::queue<std::string> bfs_q;
+  for (auto it = locations.begin(); it != locations.end(); it++){
+    in_degree[*it] = 0;
+  }
+  for (auto it = dependencies.begin(); it != dependencies.end(); it++){
+    for(int i = 0; i < (*it).size() - 1; i++){
+      aftrloc[(*it)[i]].push_back((*it)[i + 1]);
+      in_degree[(*it)[i + 1]]++;
+    }
+  } 
+  for(auto elem : locations){
+    if(in_degree[elem] == 0){
+      bfs_q.push(elem);
+    }
+  }
+  while(!bfs_q.empty()){
+    auto curr = bfs_q.front();
+    bfs_q.pop();
+    result.push_back(curr);
+    for(auto elem : aftrloc[curr]){
+      if(--in_degree[elem] == 0){
+        bfs_q.push(elem);
+      }
+    }
+  }
+  if(result.size() != locations.size()){
+    return {};
+  }
   return result;     
 }
 
