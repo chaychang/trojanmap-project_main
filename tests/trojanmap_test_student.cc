@@ -169,3 +169,13 @@ TEST(TrojanMapTest, TopologicalSort4) {
   std::vector<std::string> gt ={};
   EXPECT_EQ(result, gt);
 }
+
+TEST(TrojanMapTest, TopologicalSort5) {
+  TrojanMap m;
+  
+  std::vector<std::string> location_names = {"1", "2", "3", "4", "0"};
+  std::vector<std::vector<std::string>> dependencies = {{"0","1"}, {"0","2"}, {"1","2"}, {"1","3"}, {"2","3"}, {"2","4"}};
+  auto result = m.DeliveringTrojan(location_names, dependencies);
+  std::vector<std::string> gt ={"0", "1", "2", "3", "4"};
+  EXPECT_EQ(result, gt);
+}
