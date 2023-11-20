@@ -11,7 +11,12 @@
  * @return {double}         : latitude
  */
 double TrojanMap::GetLat(const std::string &id) { 
-  return 0;
+  for(auto it = data.begin(); it!= data.end(); it++){
+    if(it->first == id){
+      return it->second.lat;
+    }
+  }
+  return -1;
 }
 
 /**
@@ -22,7 +27,12 @@ double TrojanMap::GetLat(const std::string &id) {
  * @return {double}         : longitude
  */
 double TrojanMap::GetLon(const std::string &id) {
-  return 0;
+  for(auto it = data.begin(); it!= data.end(); it++){
+    if(it->first == id){
+      return it->second.lon;
+    }
+  }
+  return -1;
 }
 
 /**
@@ -33,7 +43,12 @@ double TrojanMap::GetLon(const std::string &id) {
  * @return {std::string}    : name
  */
 std::string TrojanMap::GetName(const std::string &id) {
-  return "";
+  for(auto it = data.begin(); it!= data.end(); it++){
+    if(it->first == id){
+      return it->second.name;
+    }
+  }
+  return "NULL";
 }
 
 /**
@@ -44,6 +59,15 @@ std::string TrojanMap::GetName(const std::string &id) {
  * @return {std::vector<std::string>}  : neighbor ids
  */
 std::vector<std::string> TrojanMap::GetNeighborIDs(const std::string &id) {
+  std::vector<std::string> neighbour_ids;
+  for(auto it = data.begin(); it!= data.end(); it++){
+    if(it->first == id){
+      // for(auto i: it->second.neighbors){
+      //   neighbour_ids.push_back(i);
+      // }
+      return it->second.neighbors;
+    }
+  }
   return {};
 }
 
@@ -57,6 +81,11 @@ std::vector<std::string> TrojanMap::GetNeighborIDs(const std::string &id) {
  */
 std::string TrojanMap::GetID(const std::string &name) {
   std::string res = "";
+  for(auto it = data.begin(); it != data.end(); it++){
+    if(it->second.name == name){
+      res = it->first;
+    }
+  }
   return res;
 }
 
@@ -246,6 +275,44 @@ double TrojanMap::CalculatePathLength(const std::vector<std::string> &path) {
 std::vector<std::string> TrojanMap::CalculateShortestPath_Dijkstra(
     std::string location1_name, std::string location2_name) {
   std::vector<std::string> path;
+  std::vector<std::pair<std::string, int>> path_and_cost;
+  std::priority_queue<std::pair<int, std::string>> pq;
+
+  for(auto it = data.begin(); it != data.end(); it++){ //initialising all nodes with infinite cost
+    path_and_cost.push_back(std::make_pair(it->second.id, INT_MAX));
+  }
+
+  pq.push(std::make_pair(0, GetID(location1_name))); //adding starting node
+
+  // double lat = GetLat("2578244375");
+  // double longit = GetLon("2578244375");
+  // std::string id_to_name = GetName("2578244375");
+  // std::vector<std::string> neighId = GetNeighborIDs("2578244375");
+  // std::string location_to_id = GetID("Ralphs");
+  // std::cout<<lat<<std::endl;
+  // std::cout<<longit<<std::endl;
+  // std::cout<<id_to_name<<std::endl;
+  // std::cout<<location_to_id<<std::endl;
+  // for(auto i: neighId){
+  //   std::cout<<"neighbour "<<i<<std::endl;
+  // }
+  
+  //loop until all nodes have been checked
+  /*
+  Logic as follows:
+  1. Pop top of pq
+  2. Check if its neighbours are shorter distance than current distance in P&C
+  3. If yes, update length and add to pq
+  4. Repeat
+  */
+ 
+  while(pq.size()!=0){
+    auto top_element = pq.top(); //get elements of top of priority queue
+    pq.pop(); //pop from top
+
+    std::string location_id = top_element.second;
+  }
+
   return path;
 }
 
