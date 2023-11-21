@@ -114,11 +114,25 @@ std::pair<double, double> TrojanMap::GetPosition(std::string name) {
  * @return {int}                    : edit distance between two strings
  */
 int TrojanMap::CalculateEditDistance(std::string a, std::string b) {  
-
-
-  
-     
-  return 0;
+  int size1 = a.size();
+  int size2 = b.size();
+  std::vector<std::vector<int>> dp(size1 + 1, std::vector<int>(size2 + 1));
+  for(int i = 0; i <= size1; i++){
+    dp[i][0] = i;
+  }
+  for(int j = 0; j <= size2; j++){
+    dp[0][j] = j;
+  }
+  for (int i = 1; i <= size1; i++){
+    for (int j = 1; j <= size2; j++){
+      if (a[i - 1] == b[j - 1]){
+        dp[i][j] = dp[i - 1][j - 1];
+      }else{
+        dp[i][j] = 1 + std::min({dp[i - 1][j], dp[i][j - 1], dp[i - 1][j - 1]});
+      }
+    }
+  }
+  return dp[size1][size2];
 }
 
 /**
@@ -130,6 +144,14 @@ int TrojanMap::CalculateEditDistance(std::string a, std::string b) {
  */
 std::string TrojanMap::FindClosestName(std::string name) {
   std::string tmp = ""; // Start with a dummy word
+  int min_dis = CalculateEditDistance(name, tmp);
+  for (auto it = data.begin(); it != data.end(); it++){
+    int dis = CalculateEditDistance(it->second.name, name);
+    if (dis < min_dis){
+      min_dis = dis;
+      tmp = it->second.name;
+    }
+  }
   return tmp;
 }
 

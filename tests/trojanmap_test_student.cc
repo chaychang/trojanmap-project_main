@@ -212,3 +212,17 @@ TEST(TrojanMapTest, CalculateShortestPath_Dijkstra) {
   std::cout << "GT path length: " << m.CalculatePathLength(gt) << "miles" << std::endl;
   EXPECT_EQ(path, gt);
 }
+
+// Test CalculateEditDistance function
+TEST(TrojanMapTest, CalculateEditDistance) {
+  TrojanMap m;
+  EXPECT_EQ(m.CalculateEditDistance("horse", "ros"), 3);
+  EXPECT_EQ(m.CalculateEditDistance("intention", "execution"), 5);
+}
+
+// Test FindClosestName function
+TEST(TrojanMapTest, FindClosestName) {
+  TrojanMap m;
+  EXPECT_EQ(m.FindClosestName("Rolphs"), "Ralphs");
+  EXPECT_EQ(m.FindClosestName("Targeety"), "Target");
+}
