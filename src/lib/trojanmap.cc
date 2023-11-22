@@ -513,10 +513,10 @@ std::vector<std::string> TrojanMap::DeliveringTrojan(
   std::map<std::string, std::vector<std::string>> aftrloc;
   std::map<std::string, int> in_degree;
   std::queue<std::string> bfs_q;
-  for (auto it = locations.begin(); it != locations.end(); it++){
+  for(auto it = locations.begin(); it != locations.end(); it++){
     in_degree[*it] = 0;
   }
-  for (auto it = dependencies.begin(); it != dependencies.end(); it++){
+  for(auto it = dependencies.begin(); it != dependencies.end(); it++){
     for(int i = 0; i < (*it).size() - 1; i++){
       aftrloc[(*it)[i]].push_back((*it)[i + 1]);
       in_degree[(*it)[i + 1]]++;
