@@ -7,3 +7,6 @@
 /bazel-*
 /opencv
 .DS_Store
+.vscode/
+ncurses.BUILD
+WORKSPACE
