@@ -302,7 +302,7 @@ std::vector<std::string> TrojanMap::CalculateShortestPath_Dijkstra(
   std::priority_queue<std::pair<double, std::string>, std::vector<std::pair<double, std::string>>, std::greater<std::pair<double, std::string>>> pq;
 
   for(auto i: data){
-    if(path_and_cost[i.first] = (i.first == GetID(location1_name))){
+    if(i.first == GetID(location1_name)){
       path_and_cost[i.first] = 0;
     }
     else{
