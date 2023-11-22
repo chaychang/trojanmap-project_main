@@ -339,6 +339,7 @@ std::vector<std::string> TrojanMap::CalculateShortestPath_Dijkstra(
       current_node = prev_nodes[current_node];
     }
     else {
+      path.clear();
       break;
     }
   }
