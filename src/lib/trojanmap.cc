@@ -297,43 +297,54 @@ double TrojanMap::CalculatePathLength(const std::vector<std::string> &path) {
 std::vector<std::string> TrojanMap::CalculateShortestPath_Dijkstra(
     std::string location1_name, std::string location2_name) {
   std::vector<std::string> path;
-  std::vector<std::pair<std::string, int>> path_and_cost;
-  std::priority_queue<std::pair<int, std::string>> pq;
+  std::unordered_map<std::string, double> path_and_cost;
+  std::unordered_map<std::string, std::string> prev_nodes;
+  std::priority_queue<std::pair<double, std::string>, std::vector<std::pair<double, std::string>>, std::greater<std::pair<double, std::string>>> pq;
 
-  for(auto it = data.begin(); it != data.end(); it++){ //initialising all nodes with infinite cost
-    path_and_cost.push_back(std::make_pair(it->second.id, INT_MAX));
+  for(auto i: data){
+    if(path_and_cost[i.first] = (i.first == GetID(location1_name))){
+      path_and_cost[i.first] = 0;
+    }
+    else{
+      path_and_cost[i.first] = INT_MAX;
+    }
   }
-
+  
   pq.push(std::make_pair(0, GetID(location1_name))); //adding starting node
 
-  // double lat = GetLat("2578244375");
-  // double longit = GetLon("2578244375");
-  // std::string id_to_name = GetName("2578244375");
-  // std::vector<std::string> neighId = GetNeighborIDs("2578244375");
-  // std::string location_to_id = GetID("Ralphs");
-  // std::cout<<lat<<std::endl;
-  // std::cout<<longit<<std::endl;
-  // std::cout<<id_to_name<<std::endl;
-  // std::cout<<location_to_id<<std::endl;
-  // for(auto i: neighId){
-  //   std::cout<<"neighbour "<<i<<std::endl;
-  // }
-  
-  //loop until all nodes have been checked
-  /*
-  Logic as follows:
-  1. Pop top of pq
-  2. Check if its neighbours are shorter distance than current distance in P&C
-  3. If yes, update length and add to pq
-  4. Repeat
-  */
- 
   while(pq.size()!=0){
     auto top_element = pq.top(); //get elements of top of priority queue
     pq.pop(); //pop from top
 
-    std::string location_id = top_element.second;
+    double current_distance = top_element.first;
+
+    std::vector<std::string> neighbour_ids = GetNeighborIDs(top_element.second); // get its neighbours 
+
+    for(auto i: neighbour_ids){
+      double euclidean_distance = CalculateDistance(top_element.second, i);
+      double distance_to_neighbour = current_distance + euclidean_distance;
+
+      if (distance_to_neighbour < path_and_cost[i]) {
+          path_and_cost[i] = distance_to_neighbour;
+          pq.push(std::make_pair(distance_to_neighbour, i));
+          prev_nodes[i] = top_element.second;
+      }
+    }
   }
+
+  std::string current_node = GetID(location2_name);
+  while(current_node!=GetID(location1_name)){
+    path.push_back(current_node);
+    if(prev_nodes.find(current_node) != prev_nodes.end()){
+      current_node = prev_nodes[current_node];
+    }
+    else {
+      break;
+    }
+  }
+
+  path.push_back(GetID(location1_name));
+  std::reverse(path.begin(), path.end());
 
   return path;
 }
