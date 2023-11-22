@@ -350,6 +350,47 @@ std::vector<std::string> TrojanMap::CalculateShortestPath_Dijkstra(
 std::vector<std::string> TrojanMap::CalculateShortestPath_Bellman_Ford(
     std::string location1_name, std::string location2_name) {
   std::vector<std::string> path;
+  std::unordered_map<std::string, double> distances;
+  std::unordered_map<std::string, std::string> before_node;
+  std::string location1_id = GetID(location1_name);
+  std::string location2_id = GetID(location2_name);
+  if(location1_id.empty() || location2_id.empty()) {
+    return {};
+  }
+
+  for(auto node : data){
+    distances[node.first] = INT_MAX;
+    before_node[node.first] = "";
+  }
+  distances[location1_id] = 0.0;
+
+  for(int i = 0; i < data.size() - 1; i++){
+    bool update = false;
+    for(auto node : data){
+      if(distances[node.first] == INT_MAX){
+        continue;
+      }
+      for(auto neighbor_id : node.second.neighbors){
+        double distance = CalculateDistance(node.first, neighbor_id);
+        if (distances[node.first] + distance < distances[neighbor_id]){
+          distances[neighbor_id] = distances[node.first] + distance;
+          before_node[neighbor_id] = node.first;
+          update = true;
+        }
+      }
+    }
+    if (!update){
+      break;
+    }
+  }
+  for(auto current = location2_id; current != location1_id; current = before_node[current]) {
+    if(before_node[current] == ""){
+      return {};
+    }
+    path.push_back(current);
+  }
+  path.push_back(location1_id);
+  std::reverse(path.begin(), path.end());
   return path;
 }
 
