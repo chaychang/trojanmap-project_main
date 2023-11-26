@@ -563,7 +563,12 @@ std::vector<std::string> TrojanMap::DeliveringTrojan(
  * @return {bool}                      : in square or not
  */
 bool TrojanMap::inSquare(std::string id, std::vector<double> &square) {
-  return true;
+  double id_lat = GetLat(id);
+  double id_lon = GetLon(id);
+  if(id_lon>=square[0] && id_lon<=square[1] && id_lat<=square[2] && id_lat>=square[3]){
+    return true;
+  }
+  return false;
 }
 
 
@@ -579,6 +584,14 @@ bool TrojanMap::inSquare(std::string id, std::vector<double> &square) {
 std::vector<std::string> TrojanMap::GetSubgraph(std::vector<double> &square) {
   // include all the nodes in subgraph
   std::vector<std::string> subgraph;
+  for(auto it = data.begin(); it!=data.end(); it++){
+    if(inSquare(it->first, square)==true){
+      subgraph.push_back(it->first);
+    }
+    else{
+      continue;
+    }
+  }
   return subgraph;
 }
 
@@ -592,6 +605,38 @@ std::vector<std::string> TrojanMap::GetSubgraph(std::vector<double> &square) {
  * @return {bool}: whether there is a cycle or not
  */
 bool TrojanMap::CycleDetection(std::vector<std::string> &subgraph, std::vector<double> &square) {
+  std::queue <std::pair<std::string, std::string>> bfs_queue;
+  std::unordered_map <std::string, int> visited_map;
+
+  for(auto i: subgraph){ //initialise visited map with 0 for each state
+    visited_map[i] = 0;
+  }
+
+  bfs_queue.push(std::make_pair(subgraph[0], "-1")); //push first element into bfs_queue
+  visited_map[subgraph[0]] = 1;
+  while(bfs_queue.size()!=0){
+    std::string node = bfs_queue.front().first; //get node and parent
+    std::string parent = bfs_queue.front().second;
+    bfs_queue.pop(); //remove first and add neighbours
+
+    std::vector<std::string> neighbour_ids = GetNeighborIDs(node); //vector of current node's neighbours
+    for(auto i: neighbour_ids){ //check each neighbour to see if exists, if so check it has  been visited
+                                // if not, then +=1 to visited and push to queue
+      if(visited_map.find(i) == visited_map.end()){
+        continue;
+      } 
+      else{
+        if(visited_map[i]==0){
+          visited_map[i]+=1;
+          bfs_queue.push({i, node});
+        }
+        else if(visited_map[i]==1 && parent!=i){
+          return true;
+        }
+      }
+    }
+  }
+  
   return false;
 }
 
