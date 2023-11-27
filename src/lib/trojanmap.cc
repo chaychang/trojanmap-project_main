@@ -636,7 +636,7 @@ bool TrojanMap::CycleDetection(std::vector<std::string> &subgraph, std::vector<d
       }
     }
   }
-  
+
   return false;
 }
 
@@ -653,6 +653,24 @@ bool TrojanMap::CycleDetection(std::vector<std::string> &subgraph, std::vector<d
  */
 std::vector<std::string> TrojanMap::FindNearby(std::string attributesName, std::string name, double r, int k) {
   std::vector<std::string> res;
+  std::vector<std::pair<double,std::string>> same_attribute_ids;
+  for(auto it=data.begin(); it!=data.end(); it++){ //get all places of the same attribute and store in order of distance from current
+    for(auto elem : it->second.attributes){
+      double distance = CalculateDistance(GetID(name),it->second.id);
+      if(elem == attributesName && distance < r){
+        same_attribute_ids.push_back({CalculateDistance(GetID(name),it->second.id), it->second.id});
+      }
+    }
+  }
+  sort(same_attribute_ids.begin(), same_attribute_ids.end());
+  same_attribute_ids.erase(same_attribute_ids.begin()); //dont include itself
+  int num_to_remove = same_attribute_ids.size() - k;
+  for(int i=0; i<num_to_remove; i++){
+    same_attribute_ids.pop_back();
+  }
+  for(auto j=same_attribute_ids.begin(); j!=same_attribute_ids.end(); j++){
+    res.push_back(j->second);
+  } 
   return res;
 }
 
