@@ -131,8 +131,15 @@ class TrojanMap {
   std::pair<double, std::vector<std::vector<std::string>>>
   TravelingTrojan_Backtracking(std::vector<std::string> location_ids);
 
+  void TravelingTrojan_Backtracking_Helper(std::string start_location, 
+                                    std::vector<std::vector<double>> &weights, std::string current_node, double current_cost,
+                                    std::vector<std::string> &current_path, double &min_cost, std::vector<std::string> min_path, 
+                                    std::vector<std::vector<std::string>> &path_perm_storage, std::vector<std::string> location_ids);
+
   std::pair<double, std::vector<std::vector<std::string>>> TravelingTrojan_2opt(
       std::vector<std::string> location_ids);
+    
+  std::vector<std::string> twoOptSwap(std::vector<std::string>& tour, int i, int j);
 
   std::pair<double, std::vector<std::vector<std::string>>> TravelingTrojan_3opt(
       std::vector<std::string> location_ids);

@@ -422,6 +422,40 @@ std::vector<std::string> TrojanMap::CalculateShortestPath_Bellman_Ford(
 std::pair<double, std::vector<std::vector<std::string>>> TrojanMap::TravelingTrojan_Brute_force(
                                     std::vector<std::string> location_ids) {
   std::pair<double, std::vector<std::vector<std::string>>> records;
+  double shortest_dist = INT_MAX;
+  std::vector<std::vector<std::string>> path_perm_storage;
+  std::vector<std::string> current_path;
+  std::string location_id_start = location_ids[0];
+
+  location_ids.erase(location_ids.begin());
+  std::sort(location_ids.begin(), location_ids.end());
+
+  do {  
+      std::vector<std::string> current_path;
+      double total_distance = 0;
+      total_distance += CalculateDistance(location_id_start, location_ids[0]);
+      current_path.push_back(location_id_start);
+
+      for(int k=0; k<location_ids.size()-1; k++){
+          total_distance += CalculateDistance(location_ids[k], location_ids[k+1]);
+          current_path.push_back(location_ids[k]);
+      }
+
+      total_distance += CalculateDistance(location_ids[location_ids.size()-1], location_id_start);
+      if(total_distance<shortest_dist) shortest_dist = total_distance;
+      current_path.push_back(location_ids[location_ids.size()-1]);
+      current_path.push_back(location_id_start);
+      path_perm_storage.push_back(current_path);
+
+  } while(next_permutation(location_ids.begin(), location_ids.end()));
+
+  std::sort(path_perm_storage.begin(), path_perm_storage.end(), [this](std::vector<std::string> &path1, std::vector<std::string> &path2) {
+        return CalculatePathLength(path1) > CalculatePathLength(path2);
+  });
+  
+  std::cout<<shortest_dist<<std::endl;
+  records.first = shortest_dist;
+  records.second = path_perm_storage;
   return records;
 }
 
@@ -429,14 +463,118 @@ std::pair<double, std::vector<std::vector<std::string>>> TrojanMap::TravelingTro
 std::pair<double, std::vector<std::vector<std::string>>> TrojanMap::TravelingTrojan_Backtracking(
                                     std::vector<std::string> location_ids) {
   std::pair<double, std::vector<std::vector<std::string>>> records;
+  std::vector<std::vector<std::string>> path_perm_storage;
+
+  double min_cost = INT_MAX;
+  double dist_between_nodes;
+
+  std::vector<std::vector<double>> weights(location_ids.size(), std::vector<double>(location_ids.size(), 0.0));
+  for(int i=0; i<location_ids.size(); i++){
+    for(int j=0; j<location_ids.size(); j++){
+      dist_between_nodes = CalculateDistance(location_ids[i], location_ids[j]);
+      weights[i][j] = dist_between_nodes;
+    }
+  }
+
+  std::string location_id_start = location_ids[0];
+  std::vector<std::string> current_path = {location_id_start}; // start with first location
+  std::vector<std::string> min_path;
+  TravelingTrojan_Backtracking_Helper(location_id_start, weights, location_id_start, 0, current_path, min_cost, min_path, path_perm_storage, location_ids);  
+  
+  std::sort(path_perm_storage.begin(), path_perm_storage.end(), [this](std::vector<std::string> &path1, std::vector<std::string> &path2) {
+        return CalculatePathLength(path1) > CalculatePathLength(path2);
+  });
+  
+  std::cout<<min_cost<<std::endl;
+  records = std::make_pair(min_cost, path_perm_storage);
+
   return records;
+}
+
+void TrojanMap::TravelingTrojan_Backtracking_Helper(std::string start_location, 
+                                    std::vector<std::vector<double>> &weights, std::string current_node, double current_cost,
+                                    std::vector<std::string> &current_path, double &min_cost, std::vector<std::string> min_path, 
+                                    std::vector<std::vector<std::string>> &path_perm_storage, std::vector<std::string> location_ids){
+  //if at leaf update min cost and path
+  if(current_path.size() == weights.size()){
+    current_path.push_back(start_location);
+    double final_cost = current_cost + CalculateDistance(current_node, start_location);
+    if(final_cost < min_cost){
+      min_cost = final_cost;
+      path_perm_storage.push_back(current_path);
+    }
+    current_path.pop_back();
+    return;
+  }
+
+  // Early backtracking
+  if(current_cost >= min_cost){
+    return;
+  }
+
+  //else evaluate all children - dfs
+  for(int i=0; i<weights.size(); i++){
+    if(std::find(current_path.begin(), current_path.end(), location_ids[i]) != current_path.end()){
+      continue;
+    }
+    current_path.push_back(location_ids[i]);
+    TravelingTrojan_Backtracking_Helper(start_location, weights, location_ids[i], current_cost+CalculateDistance(current_node, location_ids[i]), current_path, min_cost, min_path, path_perm_storage, location_ids);  
+
+    current_path.pop_back();
+  }
 }
 
 // Hint: https://en.wikipedia.org/wiki/2-opt
 std::pair<double, std::vector<std::vector<std::string>>> TrojanMap::TravelingTrojan_2opt(
       std::vector<std::string> location_ids){
   std::pair<double, std::vector<std::vector<std::string>>> records;
+std::cout << "Input: " << std::endl;
+  for(auto z: location_ids){
+    std::cout<<z<<" ";
+  }
+  std::cout<<"\n"<<std::endl;
+  std::vector<std::vector<std::string>> path_perm_storage; 
+  double shortest_dist = INT_MAX;
+  path_perm_storage.push_back(location_ids);
+
+  bool better_path = true;
+
+  while(better_path == true){
+    better_path = false;
+
+    for(int i=1; i<location_ids.size()-1; i++){
+      for(int j=i+1; j<location_ids.size(); j++){
+        std::vector<std::string> alt_path = twoOptSwap(location_ids, i, j);
+        double current_shortest_dist = CalculatePathLength(alt_path)+ CalculateDistance(alt_path.back(), location_ids[0]);
+
+        if(current_shortest_dist < shortest_dist){
+          alt_path.push_back(location_ids[0]);
+          path_perm_storage.push_back(alt_path);
+          alt_path.pop_back();
+          location_ids = alt_path;
+          shortest_dist = current_shortest_dist ;
+          better_path = true;
+        }
+      }
+    }
+  }
+
+  records = std::make_pair(shortest_dist, path_perm_storage);
   return records;
+}
+
+std::vector<std::string> TrojanMap::twoOptSwap(std::vector<std::string>& location_ids, int i, int j){
+    std::vector<std::string> alt_path;
+    for(int k=0; k<=i-1; k++){
+        alt_path.push_back(location_ids[k]);
+    }
+    for(int k=j; k>=i; k--){
+        alt_path.push_back(location_ids[k]);
+    }
+    for(int k=j+1; k<location_ids.size(); k++){
+        alt_path.push_back(location_ids[k]);
+    }
+    return alt_path;
 }
 
 // This is optional

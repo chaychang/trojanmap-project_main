@@ -794,8 +794,9 @@ void MapUI::CreateAnimation(std::vector<std::vector<std::string>> path_progress,
     cv::imshow("TrojanMap", img);
     cv::waitKey(1);
   }
-  for (int i = 0 ; i < 5; i++)
-    video.write(img);
+  // for (int i = 0 ; i < 5; i++) {
+  //   video.write(img);
+  // }
 	video.release();
 }
 /**
