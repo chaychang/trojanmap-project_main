@@ -370,7 +370,7 @@ Please report and compare the time spent by these algorithms.
 
 **You should create a table like below, which includes the runtime of the algorithm for several examples.**
 
-| Point A to Point B      | Dijkstra | Bellman Ford| Bellman Ford optimized|
+| Point A to Point B      | Dijkstra | Bellman Ford optimized | Bellman Ford |
 | -------------------- | ----------- |-------|-----|
 |Ralphs -> Chipotle |  17738 ms         | 8113 ms    |     |
 |Chevron -> Chase |  21118 ms         | 9338 ms    |     |
@@ -431,49 +431,53 @@ If it does, return true and report the path of the cycle on the map. Otherwise r
 
 Example 1:
 ```shell
-Input: square = {-118.299, -118.264, 34.032, 34.011}
-Output: true
-```
-Here we use the whole original graph as our subgraph. 
-<p align="center"><img src="img/cycle1.png" alt="TSP" width="500"/></p>
+Input: square = {-118.28, -118.27, 34.03, 34.015}
+Output: True
 
-Example 2:
-```shell
-Input: square = {-118.290, -118.289, 34.030, 34.020}
-Output: false
-```
-Here we use a square area inside USC campus as our subgraph
-<p align="center"><img src="img/cycle2.png" alt="TSP" width="500"/></p>
-
-```shell
-5
 **************************************************************
 * 5. Cycle Detection                                          
 **************************************************************
 
-Please input the left bound longitude(between -118.320 and -118.250):-118.299
-Please input the right bound longitude(between -118.320 and -118.250):-118.264
-Please input the upper bound latitude(between 34.000 and 34.040):34.032
-Please input the lower bound latitude(between 34.000 and 34.040):34.011
+Please input the left bound longitude(between -118.320 and -118.250):-118.28
+Please input the right bound longitude(between -118.320 and -118.250):-118.27
+Please input the upper bound latitude(between 34.000 and 34.040):34.03
+Please input the lower bound latitude(between 34.000 and 34.040):34.015
 *************************Results******************************
 there exists a cycle in the subgraph 
 **************************************************************
-Time taken by function: 0 ms
+Time taken by function: 15 ms
+```
+<p align="center"><img src="img/cycle detection example1.jpg" alt="TSP" width="500"/></p>
 
-5
+Example 2:
+```shell
+Input: square = {-118.305, -118.275, 34.026, 34.020}
+Output: true
+
 **************************************************************
 * 5. Cycle Detection                                          
 **************************************************************
 
-Please input the left bound longitude(between -118.320 and -118.250):-118.290
-Please input the right bound longitude(between -118.320 and -118.250):-118.289
-Please input the upper bound latitude(between 34.000 and 34.040):34.030
+Please input the left bound longitude(between -118.320 and -118.250):-118.305
+Please input the right bound longitude(between -118.320 and -118.250):-118.275
+Please input the upper bound latitude(between 34.000 and 34.040):34.026
 Please input the lower bound latitude(between 34.000 and 34.040):34.020
 *************************Results******************************
-there exist no cycle in the subgraph 
+there exists a cycle in the subgraph 
 **************************************************************
-Time taken by function: 0 ms
+Time taken by function: 32 ms
 ```
+<p align="center"><img src="img/cycle detection example2_2.jpg" alt="TSP" width="500"/></p>
+<p align="center"><img src="img/cycle detection example2.jpg" alt="TSP" width="500"/></p>
+
+Example 3:
+```shell
+Input: square = {-118.29, -118.289, 34.03, 34.020}
+Output: false
+```
+<p align="center"><img src="img/cycle detection example3_2.jpg" alt="TSP" width="500"/></p>
+<p align="center"><img src="img/cycle detection example3.jpg" alt="TSP" width="500"/></p>
+
 
 ## Item 8: Topological Sort (Phase 2)
 
@@ -572,39 +576,54 @@ We will randomly select N points in the map and run your program.
 
 In this task, we will select N random points on the map and you need to find the path to travel these points and back to the start point.
 
-Please input the number of the places:8
-"8201681442","6197156485","7786565237","6820972477","6807600525","1832234142","6819144993","1873055949",
+Please input the number of the places:5
+"348123749","21098481","6510353833","8144251549","6816800254",
 Calculating ...
+5.86014
 *************************Results******************************
 TravelingTrojan_Brute_force
-"8201681442","1873055949","6197156485","1832234142","6807600525","6819144993","7786565237","6820972477","8201681442",
-The distance of the path is:7.94756 miles
+"348123749","6816800254","8144251549","6510353833","21098481","348123749",
+The distance of the path is:5.86014 miles
 **************************************************************
-You could find your animation at src/lib/output.avi.          
-Time taken by function: 59 ms
+You could find your animation at src/lib/output0.avi.          
+Time taken by function: 13 ms
 
 Calculating ...
+5.86014
 *************************Results******************************
 TravelingTrojan_Backtracking
-"8201681442","6820972477","7786565237","6819144993","6807600525","1832234142","6197156485","1873055949","8201681442",
-The distance of the path is:7.94756 miles
+"348123749","6816800254","8144251549","6510353833","21098481","348123749",
+The distance of the path is:5.86014 miles
 **************************************************************
-You could find your animation at src/lib/output_backtracking.avi.
-Time taken by function: 20 ms
+You could find your animation at src/lib/output0_backtracking.avi.
+Time taken by function: 6 ms
 
 Calculating ...
+Input: 
+348123749 21098481 6510353833 8144251549 6816800254 
+
 *************************Results******************************
 TravelingTrojan_2opt
-"8201681442","1873055949","6197156485","1832234142","6807600525","6819144993","7786565237","6820972477","8201681442",
-The distance of the path is:7.94756 miles
+"348123749","6816800254","8144251549","6510353833","21098481","348123749",
+The distance of the path is:5.86014 miles
 **************************************************************
-You could find your animation at src/lib/output_2opt.avi.     
-Time taken by function: 0 ms
+You could find your animation at src/lib/output0_2opt.avi.     
+Time taken by function: 1 ms
 ```
 
-<p align="center"><img src="img/TSP.png" alt="TSP" width="500"/></p>
+### TSP Example
+<p align="center"><img src="img/tsp_final_example1.jpg" alt="TSP" width="500"/></p>
 
-<p align="center"><img src="img/output.gif" alt="TSP videos" width="500"/></p>
+#### Brute Force Solution
+<p align="center"><video width="500" controls><source src="src/lib/output0.avi" type="video/avi"></video></p>
+
+#### Brute Force +Backtracking Solution
+<p align="center"><video width="500" controls><source src="src/lib/output0_backtracking.avi" type="video/avi"></video></p>
+
+#### 2-opt Solution
+<p align="center"><video width="500" controls><source src="src/lib/output0-2opt.avi" type="video/avi"></video></p>
+
+
 
 
 ## Item 10: Find Nearby (Phase 3)
@@ -635,7 +654,7 @@ Please report and compare the time spent by this algorithm and show the points o
 
 ```shell
 **************************************************************
-* 10. Find Nearby                                    
+* 10. Find Nearby                                              
 **************************************************************
 
 Please input the attribute:supermarket
@@ -648,10 +667,40 @@ Find Nearby Results:
 2 Cal Mart Beer & Wine Food Store
 3 Food 4 Less
 **************************************************************
-Time taken by function: 5 ms
+Time taken by function: 1267 ms
+
+**************************************************************
+* 10. Find Nearby                                              
+**************************************************************
+
+Please input the attribute:school
+Please input the locations:Holy Name School
+Please input radius r:10
+Please input number k:15
+*************************Results******************************
+Find Nearby Results:
+1 Foshay Learning Center
+2 Twenty-Fourth Street Elementary School
+3 Santa Barbara Avenue School
+4 Martin Luther King Jr Elementary School
+5 Vermont Elementary School
+6 Saint Agnes Elementary School
+7 Washington Boulevard School
+8 Missionette Christian Academy
+9 Saint Cecilia School
+10 Divine Providence Kindergarten and Day Nursery
+11 Normandie Elementary School
+12 National Schools
+13 West Vernon Elementary School
+14 Trinity Elementary School
+15 Central Adult Senior High
+**************************************************************
+Time taken by function: 1612 ms
 ```
 
-<p align="center"><img src="img/Nearby.png" alt="Nearby" width="500"/></p>
+<p align="center"><img src="img/find_nearby_example1_map.jpg" alt="Nearby" width="500"/></p>
+<p align="center"><img src="img/find_nearby_example2_map.jpg" alt="Nearby" width="500"/></p>
+
 
 ## Item 11: Find the Shortest Path to Visit All locations (Phase 3)
 
