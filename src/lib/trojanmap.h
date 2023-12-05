@@ -165,6 +165,30 @@ class TrojanMap {
   std::vector<bool> Queries(const std::vector<std::pair<double, std::vector<std::string>>> &q);
 
   //----------------------------------------------------- User-defined functions
+  bool Queries_helper(const std::string source_id, const std::string dest_id, double tank_capacity){
+    if(source_id.empty() || dest_id.empty()){
+        return false;
+    }
+    std::queue<std::string> neighbor_ids;
+    std::unordered_set<std::string> visited;
+    neighbor_ids.push(source_id);
+    visited.insert(source_id);
+    while(!neighbor_ids.empty()){
+        auto current = neighbor_ids.front();
+        if(current == dest_id){
+            return true;
+        }
+        for(auto neighbor : GetNeighborIDs(current)){
+            double dis2neigh = CalculateDistance(current, neighbor);
+            if(dis2neigh <= tank_capacity && visited.count(neighbor) == 0){
+                neighbor_ids.push(neighbor);
+                visited.insert(neighbor);
+            }
+        }
+        neighbor_ids.pop();
+    }
+    return false;
+  }
 };
 
 #endif

@@ -391,7 +391,7 @@ std::vector<std::string> TrojanMap::CalculateShortestPath_Bellman_Ford(
         }
       }
     }
-    if (!update){
+    if(!update){
       break;
     }
   }
@@ -821,8 +821,50 @@ std::vector<std::string> TrojanMap::FindNearby(std::string attributesName, std::
  */
 std::vector<std::string> TrojanMap::TrojanPath(
       std::vector<std::string> &location_names) {
-    std::vector<std::string> res;
-    return res;
+  std::map<std::set<int>, double> weight_map;
+  double shortest_path = INT_MAX;
+  std::vector<int> index;
+  std::vector<std::string> final_path;
+  std::vector<std::string> res;
+  for(int i = 0; i < location_names.size(); i++){
+    for(int j = i; j < location_names.size(); j++){
+      std::vector<std::string> path = CalculateShortestPath_Bellman_Ford(location_names[i], location_names[j]);
+      double distance = CalculatePathLength(path);
+      //std::cout<<"distance"<<distance<<std::endl;
+      weight_map[{i, j}] = distance;
+    }
+  }
+  for(int i = 0; i < location_names.size(); i++){
+    index.push_back(i);
+  }
+  do {
+      double current_path = 0.0;
+      for(int i = 0; i < index.size() - 1; i++) {
+          std::set<int> loc_pair = {index[i], index[i + 1]};
+          current_path += weight_map[loc_pair];
+          //std::cout<<"current_node "<< index[i]<<std::endl;
+      }
+      //std::cout<<"current_path "<< current_path<<std::endl;
+      if(current_path < shortest_path){
+        shortest_path = current_path;
+        final_path.clear();
+        for(auto idx : index){
+          final_path.push_back(location_names[idx]);
+          //std::cout<< idx << std::endl;
+        }
+      }
+  }while(std::next_permutation(index.begin(), index.end()));
+  // for(auto elem : final_path){
+  //   std::cout<<"path: "<<elem<<std::endl;
+  // }
+  for(int i = 0; i < final_path.size() - 1; i++) {
+    auto path_segment = CalculateShortestPath_Bellman_Ford(final_path[i], final_path[i + 1]);
+    if (i != 0 && !path_segment.empty()) {
+        path_segment.erase(path_segment.begin());
+    }// remove the first point if the segment not the first.
+    res.insert(res.end(), path_segment.begin(), path_segment.end());
+}
+return res;
 }
 
 /**
@@ -832,7 +874,15 @@ std::vector<std::string> TrojanMap::TrojanPath(
  * @return {std::vector<bool> }      : existence of the path
  */
 std::vector<bool> TrojanMap::Queries(const std::vector<std::pair<double, std::vector<std::string>>>& q) {
-    std::vector<bool> ans(q.size());
+    std::vector<bool> ans;
+    for(auto elem : q){
+      double tank_capacity = elem.first;
+      std::string source = elem.second[0];  
+      std::string destination = elem.second[1];
+      std::string source_id = GetID(source);
+      std::string destination_id = GetID(destination);
+      ans.push_back(Queries_helper(source_id, destination_id, tank_capacity));
+    }
     return ans;
 }
 
