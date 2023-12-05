@@ -542,8 +542,49 @@ Time taken by function: 2 ms
 <p align="center"><img src="img/TopologicalSort.png" alt="TSP" width="500"/></p>
 
 In the user interface, we read the locations and dependencies from `topologicalsort_dependencies.csv` and `topologicalsort_locations.csv` to modify your input there.
+### Topological Sort Example 1
+```shell
+Topological Sorting Dependencies
+Dulce,CAVA
+CAVA,Honeybird
+Honeybird,Chipotle
+Chipotle,Ralphs
+Ralphs,Parking Center
+*************************Results******************************
+Topological Sorting Results:
+Dulce
+CAVA
+Honeybird
+Chipotle
+Ralphs
+Parking Center
+**************************************************************
+Time taken by function: 0 ms
+```
+<p align="center"><img src="img/Topological Sort_1.png" alt="TSP" width="500"/></p>
 
-
+### Topological Sort Example 2
+```shell
+Topological Sorting Dependencies
+USC Parking,USC Village Gym
+USC Parking,USC Credit Union
+USC Village Gym,USC Credit Union
+USC Credit Union,Lyons Center
+Lyons Center,Honda
+Popeyes,Honda
+Lyons Center,Popeyes
+*************************Results******************************
+Topological Sorting Results:
+USC Parking
+USC Village Gym
+USC Credit Union
+Lyons Center
+Popeyes
+Honda
+**************************************************************
+Time taken by function: 0 ms
+```
+<p align="center"><img src="img/Topological Sort_2.png" alt="TSP" width="500"/></p>
 ## Item 9: The Traveling Trojan Problem (AKA Traveling Salesman!) (Phase 3)
 
 In this section, we assume that we are using a UAV which means we can fly directly from 1 point to another point. Given a vector of location ids, assume every location can reach all other locations in the vector (i.e. assume that the vector of location ids is a complete graph).
