@@ -626,47 +626,50 @@ We will randomly select N points in the map and run your program.
 In this task, we will select N random points on the map and you need to find the path to travel these points and back to the start point.
 
 Please input the number of the places:5
-"6279600811","1614922681","4096366544","6788584368","6817140888",
+"123367929","1732243574","1771004833","8566199559","1614922603",
 Calculating ...
-5.55204
+8.63546
 *************************Results******************************
 TravelingTrojan_Brute_force
-"6279600811","6817140888","4096366544","1614922681","6788584368","6279600811",
-The distance of the path is:5.55204 miles
+"123367929","8566199559","1771004833","1732243574","1614922603","123367929",
+The distance of the path is:8.63546 miles
 **************************************************************
 You could find your animation at src/lib/output0.avi.          
-Time taken by function: 9 ms
+Time taken by function: 15 ms
 
 Calculating ...
-5.55204
+8.63546
 *************************Results******************************
 TravelingTrojan_Backtracking
-"6279600811","6817140888","4096366544","1614922681","6788584368","6279600811",
-The distance of the path is:5.55204 miles
+"123367929","8566199559","1771004833","1732243574","1614922603","123367929",
+The distance of the path is:8.63546 miles
 **************************************************************
 You could find your animation at src/lib/output0_backtracking.avi.
-Time taken by function: 2 ms
+Time taken by function: 1 ms
 
 Calculating ...
 Input: 
-6279600811 1614922681 4096366544 6788584368 6817140888 
+123367929 1732243574 1771004833 8566199559 1614922603 
 
 *************************Results******************************
 TravelingTrojan_2opt
-"6279600811","6817140888","4096366544","1614922681","6788584368","6279600811",
-The distance of the path is:5.55204 miles
+"123367929","8566199559","1771004833","1732243574","1614922603","123367929",
+The distance of the path is:8.63546 miles
 **************************************************************
 You could find your animation at src/lib/output0_2opt.avi.     
-Time taken by function: 0 ms
+Time taken by function: 1 ms
 ```
 
 ### TSP Example
 <p align="center"><img src="img/tsp_final_screenshot.jpg" alt="TSP" width="500"/></p>
-#### Brute Force
+
+### Brute Force
 <p align="center"><img src="img/output_2.gif" alt="TSP videos" width="500"/></p>
-#### Backtracking
+
+### Backtracking
 <p align="center"><img src="img/backtracking.gif" alt="TSP videos" width="500"/></p>
-#### 2-opt
+
+### 2-opt
 <p align="center"><img src="img/2opt.gif" alt="TSP videos" width="500"/></p>
 
 
