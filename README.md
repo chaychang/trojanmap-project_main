@@ -662,8 +662,12 @@ Time taken by function: 0 ms
 
 ### TSP Example
 <p align="center"><img src="img/tsp_final_screenshot.jpg" alt="TSP" width="500"/></p>
-
-<p align="center"><img src="img/ezgif.com-video-to-gif.gif" alt="TSP videos" width="500"/></p>
+#### Brute Force
+<p align="center"><img src="img/output_2.gif" alt="TSP videos" width="500"/></p>
+#### Backtracking
+<p align="center"><img src="img/backtracking.gif" alt="TSP videos" width="500"/></p>
+#### 2-opt
+<p align="center"><img src="img/2opt.gif" alt="TSP videos" width="500"/></p>
 
 
 ## Item 10: Find Nearby (Phase 3)
