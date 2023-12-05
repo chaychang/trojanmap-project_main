@@ -626,42 +626,42 @@ We will randomly select N points in the map and run your program.
 In this task, we will select N random points on the map and you need to find the path to travel these points and back to the start point.
 
 Please input the number of the places:5
-"348123749","21098481","6510353833","8144251549","6816800254",
+"6279600811","1614922681","4096366544","6788584368","6817140888",
 Calculating ...
-5.86014
+5.55204
 *************************Results******************************
 TravelingTrojan_Brute_force
-"348123749","6816800254","8144251549","6510353833","21098481","348123749",
-The distance of the path is:5.86014 miles
+"6279600811","6817140888","4096366544","1614922681","6788584368","6279600811",
+The distance of the path is:5.55204 miles
 **************************************************************
 You could find your animation at src/lib/output0.avi.          
-Time taken by function: 13 ms
+Time taken by function: 9 ms
 
 Calculating ...
-5.86014
+5.55204
 *************************Results******************************
 TravelingTrojan_Backtracking
-"348123749","6816800254","8144251549","6510353833","21098481","348123749",
-The distance of the path is:5.86014 miles
+"6279600811","6817140888","4096366544","1614922681","6788584368","6279600811",
+The distance of the path is:5.55204 miles
 **************************************************************
 You could find your animation at src/lib/output0_backtracking.avi.
-Time taken by function: 6 ms
+Time taken by function: 2 ms
 
 Calculating ...
 Input: 
-348123749 21098481 6510353833 8144251549 6816800254 
+6279600811 1614922681 4096366544 6788584368 6817140888 
 
 *************************Results******************************
 TravelingTrojan_2opt
-"348123749","6816800254","8144251549","6510353833","21098481","348123749",
-The distance of the path is:5.86014 miles
+"6279600811","6817140888","4096366544","1614922681","6788584368","6279600811",
+The distance of the path is:5.55204 miles
 **************************************************************
 You could find your animation at src/lib/output0_2opt.avi.     
-Time taken by function: 1 ms
+Time taken by function: 0 ms
 ```
 
 ### TSP Example
-<p align="center"><img src="img/tsp_final_example1.jpg" alt="TSP" width="500"/></p>
+<p align="center"><img src="img/tsp_final_screenshot.jpg" alt="TSP" width="500"/></p>
 
 <p align="center"><img src="img/ezgif.com-video-to-gif.gif" alt="TSP videos" width="500"/></p>
 

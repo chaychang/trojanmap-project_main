@@ -535,7 +535,9 @@ std::cout << "Input: " << std::endl;
   std::cout<<"\n"<<std::endl;
   std::vector<std::vector<std::string>> path_perm_storage; 
   double shortest_dist = INT_MAX;
+  location_ids.push_back(location_ids[0]);
   path_perm_storage.push_back(location_ids);
+  location_ids.pop_back();
 
   bool better_path = true;
 
