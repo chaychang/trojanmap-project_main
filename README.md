@@ -483,8 +483,8 @@ Example 4:
 <p align="center"><img src="img/cycle detection example4.jpg" alt="TSP" width="500"/></p>
 
 Example 5:
-<p align="center"><img src="img/cycle detection example5_2.jpg" alt="TSP" width="500"/></p>
-<p align="center"><img src="img/cycle detection example5.jpg" alt="TSP" width="500"/></p>
+<p align="center"><img src="img/cycle detection example5_2 - Copy.jpg" alt="TSP" width="500"/></p>
+<p align="center"><img src="img/cycle detection example5 - Copy.jpg" alt="TSP" width="500"/></p>
 
 
 ## Item 8: Topological Sort (Phase 2)
