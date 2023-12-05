@@ -770,7 +770,6 @@ Time taken by function: 61834 ms
 **************************************************************
 * 11. Shortest Path to Visit all Nodes                        
 **************************************************************
-
 USC Village Gym
 Lyons Center
 Honda
@@ -783,6 +782,8 @@ Time taken by function: 97712 ms
 ```
 
 <p align="center"><img src="img/item11_2.png" alt="All" width="500"/></p>
+
+
 ## Item 12: Check the existence of the path with a constrained gas tank (Phase 3)
 
 Given a map of nodes, you need to determine if it is possible to travel from a given starting point to a destination point with a car that has a certain size of gas tank. You can refuel at any nodes. If the distance between any two nodes on the path is larger than the size of the gas tank, you cannot travel between those nodes. Assume 1 gallon of gas can travel 1 mile.
