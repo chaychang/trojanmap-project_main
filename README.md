@@ -370,23 +370,23 @@ Please report and compare the time spent by these algorithms.
 
 **You should create a table like below, which includes the runtime of the algorithm for several examples.**
 
-| Point A to Point B      | Dijkstra | Bellman Ford optimized | Bellman Ford |
-| -------------------- | ----------- |-------|-----|
-|Ralphs -> Chipotle |  17738 ms         | 8113 ms    |     |
-|Chevron -> Chase |  21118 ms         | 9338 ms    |     |
-|Honeybird -> Honda |  24547 ms         | 9711 ms    |     |
-|Chipotle -> Parking Center |  25821 ms         | 9187 ms    |     |
-|Food Mart -> Starbucks |  21139 ms         | 8439 ms    |     |
-|KFC -> Fashion District |  20095 ms         | 9385 ms    |     |
-|Dulce -> CAVA |  19850 ms         | 8466 ms    |     |
-|Dulce -> Honeybird |  18430 ms         | 9521 ms    |     |
-|The Pearl -> The Barber Shop |  15725 ms         | 8382 ms    |     |
-|Popeyes -> Studio 423 |  18925 ms         | 10340 ms    |     |
-|LycaMobile -> Honda |  19966 ms         | 10712 ms    |     |
-|Lyons Center -> Leavey Library |  18347 ms         | 9298 ms    |     |
-|USC Village Gym -> USC Parking |  17237 ms         | 6900 ms    |     |
-|Holbox -> KFC |  23901 ms         | 10070 ms    |     |
-|USC Credit Union -> City Tacos |  20015 ms         | 11239 ms    |     |
+| Point A to Point B      | Dijkstra | Bellman Ford optimized | 
+| -------------------- | ----------- |-------|
+|Ralphs -> Chipotle |  17738 ms         | 8113 ms    |    
+|Chevron -> Chase |  21118 ms         | 9338 ms    |     
+|Honeybird -> Honda |  24547 ms         | 9711 ms    |   
+|Chipotle -> Parking Center |  25821 ms         | 9187 ms    |
+|Food Mart -> Starbucks |  21139 ms         | 8439 ms    |
+|KFC -> Fashion District |  20095 ms         | 9385 ms    |
+|Dulce -> CAVA |  19850 ms         | 8466 ms    |     
+|Dulce -> Honeybird |  18430 ms         | 9521 ms    |
+|The Pearl -> The Barber Shop |  15725 ms         | 8382 ms    |    
+|Popeyes -> Studio 423 |  18925 ms         | 10340 ms    |    
+|LycaMobile -> Honda |  19966 ms         | 10712 ms    |     
+|Lyons Center -> Leavey Library |  18347 ms         | 9298 ms    |     
+|USC Village Gym -> USC Parking |  17237 ms         | 6900 ms    |     
+|Holbox -> KFC |  23901 ms         | 10070 ms    |     
+|USC Credit Union -> City Tacos |  20015 ms         | 11239 ms    |     
 
 Your table should show have at least 15 rows.
 
