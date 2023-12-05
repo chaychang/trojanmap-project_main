@@ -478,6 +478,14 @@ Output: false
 <p align="center"><img src="img/cycle detection example3_2.jpg" alt="TSP" width="500"/></p>
 <p align="center"><img src="img/cycle detection example3.jpg" alt="TSP" width="500"/></p>
 
+Example 4:
+<p align="center"><img src="img/cycle detection example4_2.jpg" alt="TSP" width="500"/></p>
+<p align="center"><img src="img/cycle detection example4.jpg" alt="TSP" width="500"/></p>
+
+Example 5:
+<p align="center"><img src="img/cycle detection example5_2.jpg" alt="TSP" width="500"/></p>
+<p align="center"><img src="img/cycle detection example5.jpg" alt="TSP" width="500"/></p>
+
 
 ## Item 8: Topological Sort (Phase 2)
 
@@ -614,16 +622,7 @@ Time taken by function: 1 ms
 ### TSP Example
 <p align="center"><img src="img/tsp_final_example1.jpg" alt="TSP" width="500"/></p>
 
-#### Brute Force Solution
-<p align="center"><video width="500" controls><source src="src/lib/output0.avi" type="video/avi"></video></p>
-
-#### Brute Force +Backtracking Solution
-<p align="center"><video width="500" controls><source src="src/lib/output0_backtracking.avi" type="video/avi"></video></p>
-
-#### 2-opt Solution
-<p align="center"><video width="500" controls><source src="src/lib/output0-2opt.avi" type="video/avi"></video></p>
-
-
+<p align="center"><img src="img/ezgif.com-video-to-gif.gif" alt="TSP videos" width="500"/></p>
 
 
 ## Item 10: Find Nearby (Phase 3)

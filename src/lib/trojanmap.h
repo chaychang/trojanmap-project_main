@@ -139,7 +139,7 @@ class TrojanMap {
   std::pair<double, std::vector<std::vector<std::string>>> TravelingTrojan_2opt(
       std::vector<std::string> location_ids);
     
-  std::vector<std::string> twoOptSwap(std::vector<std::string>& tour, int i, int j);
+  std::vector<std::string> twoOptSwap(std::vector<std::string>&location_ids, int i, int j);
 
   std::pair<double, std::vector<std::vector<std::string>>> TravelingTrojan_3opt(
       std::vector<std::string> location_ids);
