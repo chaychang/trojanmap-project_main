@@ -32,9 +32,11 @@ The project is submitted in different phases. You are required to submit the fol
    - Tables, plots and comparisons
    - No coding details in the video
 
-   Here is a [sample video from a previous semester.](https://www.youtube.com/watch?v=_KDML4Ck3SU&t=4s) 
+   Here is a [sample video from a previous semester.](https://www.youtube.com/watch?v=_KDML4Ck3SU&t=4s)
 
-3. A final report in the README file of your GitHub submission. The final report should include the questions that are asked in this README file, your tables and plots for the runtime results, and any other detail of your code.
+   Final Video Presentation: https://www.youtube.com/watch?v=1yEU4EFVe68
+
+4. A final report in the README file of your GitHub submission. The final report should include the questions that are asked in this README file, your tables and plots for the runtime results, and any other detail of your code.
 
 ## Due Dates
 
